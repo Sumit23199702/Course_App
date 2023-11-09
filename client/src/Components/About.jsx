@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './About.css';
 import img from '../assets/img.jpg'
 
+
 const About = () => {
   const [showMore, setShowMore] = useState(false);
 
@@ -14,6 +15,7 @@ const About = () => {
       <div className="sidebar">
         <img src={img} alt="TechLearn Hub Logo" />
       </div>
+      <br />
       <div className="content">
         <h2>About Us</h2>
         <p>
