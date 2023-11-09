@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
+import axios from 'axios';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,13 +9,22 @@ const Login = () => {
   const [Email, setUsername] = useState("");
   const [Password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    // Replace this with your actual authentication logic
-    if (Email === "yourEmail" && Password === "yourPassword") {
-      toast.success("Login successful!");
-    } else {
-      toast.error("Invalid credentials. Please try again.");
+  const handleLogin = async() => {
+    try{
+    const response = await axios.post("http://localhost:5000/login", {
+        Email,
+        Password,
+      });
+      
+        toast.success("Login successful!");
+        console.log(response);
     }
+    catch(error){
+    // if (Email === "yourEmail" && Password === "yourPassword") {
+    //   toast.success("Login successful!");
+      toast.error("Invalid credentials. Please try again.");
+      console.log(error)
+  }
   };
 
   return (

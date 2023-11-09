@@ -28,7 +28,7 @@ const Home = () => {
           />
         </Carousel.Item>
       </Carousel>
-      <h1 className="mt-5">Welcome to Your LMS Platform</h1>
+      <h1 className="mt-5">Welcome to Our TechLearn Hub</h1>
       <p>Explore a world of knowledge with our courses!</p>
     </div>
   );

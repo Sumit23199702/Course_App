@@ -15,7 +15,7 @@ const RegisterPage = () => {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post("localhost:5000/register", {
+      const response = await axios.post("http://localhost:5000/register", {
         Name,
         Usn,
         Gender,
@@ -26,10 +26,11 @@ const RegisterPage = () => {
       console.log(response);
 
       // Assuming your backend returns a success message
-      toast.success(response.data.message);
+      toast.success("Registered successfully!!",response.data.message);
     } catch (error) {
       // Handle registration failure
       toast.error("Registration failed. Please try again.");
+      console.log(error);
     }
   };
 
