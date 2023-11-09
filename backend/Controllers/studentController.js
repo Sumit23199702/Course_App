@@ -86,6 +86,7 @@ let createStudent = async (req, res) => {
       msg: "Student Data registered Successfully",
       data: registerStudent,
     });
+    console.log(registerStudent)
   } catch (error) {
     return res
       .status(500)
@@ -126,6 +127,7 @@ let loginStudent = async (req, res) => {
         .status(200)
         .send({ msg: "Student logged In Successfully", token });
     }
+    
   } catch (error) {
     return res
       .status(500)

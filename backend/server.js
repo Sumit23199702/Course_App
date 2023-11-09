@@ -23,7 +23,7 @@ mongoose
 
 // Test API
 app.get("/test", (req, res) => {
-  res.send("Hello Hitaish, This is Test Api 😎");
+  res.send("Hello , This is Test Api 😎");
 });
 
 app.listen(5000, () => {
