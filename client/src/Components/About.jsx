@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './About.css';
-import '../assets/'
+import pic from '../assets/img.jpg'
 
 const About = () => {
   const [showMore, setShowMore] = useState(false);
@@ -12,8 +12,9 @@ const About = () => {
   return (
     <div className="about-container">
       <div className="sidebar">
-        <img src="assets/img.jpg" alt="TechLearn Hub Logo" />
+        <img src={pic} alt="TechLearn Hub Logo" className='img-fluid'/>
       </div>
+      <br />
       <div className="content">
         <h2>About Us</h2>
         <p>

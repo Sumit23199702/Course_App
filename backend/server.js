@@ -12,7 +12,7 @@ app.use("/", routes);
 // DB Connection
 mongoose
   .connect(
-    "mongodb+srv://Sumit001:Sumit001@cluster0.8e9be5o.mongodb.net/Batch3"
+    "mongodb+srv://Sumit001:Sumit001@cluster0.8e9be5o.mongodb.net/Course-App"
   )
   .then(() => {
     console.log("Database is Connected Successfully 😎");
