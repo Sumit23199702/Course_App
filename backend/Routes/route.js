@@ -7,7 +7,7 @@ const {createCourse, updateCourse, getCourse,deleteCourse} = require('../Control
 router.post("/register", StudentController.createStudent);
 router.post("/login", StudentController.loginStudent)
 
-router.post("/course", createCourse);
+router.post("/createCourse", createCourse);
 router.put("/updatecourse", updateCourse);
 router.delete('/deletecourse', deleteCourse);
 router.get('/getcourse', getCourse);
