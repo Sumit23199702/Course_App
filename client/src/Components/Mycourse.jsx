@@ -84,7 +84,7 @@ const MyCourses = () => {
   const handleCourseDeletion = async (courseName) => {
     try {
       // Delete the course in the backend
-      await fetch(`http://localhost:5000/deletecourse?name=${courseName}`, {
+      await fetch(`http://localhost:5000/deletecourse`, {
         method: 'DELETE',
       });
 
