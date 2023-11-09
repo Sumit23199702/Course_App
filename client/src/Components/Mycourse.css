@@ -48,3 +48,96 @@
     list-style: none;
   }
   
+
+
+/* 
+   .my-courses-container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+  
+  .course-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .course-form input,
+  .course-form textarea {
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+  }
+  
+  .course-form button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .course-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  ul {
+    padding: 0;
+    list-style: none;
+  }
+  
+  .card {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .card-subtitle {
+    color: #6c757d;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .card-text {
+    font-size: 16px;
+  }
+  
+  .delete-button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .delete-button:hover {
+    background-color: #c82333;
+  }
+   */
