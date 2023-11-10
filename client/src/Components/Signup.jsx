@@ -29,7 +29,7 @@ const RegisterPage = () => {
       toast.success("Registered successfully!!",response.data.message);
     } catch (error) {
       // Handle registration failure
-      toast.error("Registration failed. Please try again.");
+      toast.error(error.response.data.msg);
       console.log(error);
     }
   };
