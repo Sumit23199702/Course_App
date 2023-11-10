@@ -26,9 +26,11 @@ const RegisterPage = () => {
       console.log(response);
 
       // Assuming your backend returns a success message
-      toast.success("Registered successfully!!",response.data.message);
+      toast.success("Registered successfully!!", response.data.message);
     } catch (error) {
       // Handle registration failure
+      toast.error(error.response.data.msg);
+      // toast.error("Registration failed. Please try again.");
       toast.error(error.response.data.msg);
       console.log(error);
     }

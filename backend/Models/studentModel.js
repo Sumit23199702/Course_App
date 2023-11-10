@@ -6,11 +6,6 @@ const studentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    Usn: {
-      type: String,
-      required: true,
-      Unique: true,
-    },
     Gender: {
       type: String,
       required: true,

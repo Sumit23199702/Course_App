@@ -9,7 +9,7 @@ let createStudent = async (req, res) => {
     if (!validation.isValidBody(data)) {
       return res.status(400).send({ status: false, msg: "No Data Provided" });
     }
-    let { Name, Usn, Gender, Email, Mobile, Password } = data;
+    let { Name, Gender, Email, Mobile, Password } = data;
 
     // Name Validation
     if (!validation.isValid(Name)) {
@@ -20,18 +20,6 @@ let createStudent = async (req, res) => {
 
     if (!validation.isValidName.test(Name)) {
       return res.status(400).send({ msg: "Name Should be Valid" });
-    }
-
-    // Usn Validation
-    if (!validation.isValid(Usn)) {
-      return res
-        .status(400)
-        .send({ status: false, msg: "Please Enter Your Usn Number" });
-    }
-
-    let dupUsn = await StudentModel.findOne({ Usn });
-    if (dupUsn) {
-      return res.status(400).send({ msg: "Usn Already Registered" });
     }
 
     // Gender Validation
@@ -122,11 +110,11 @@ let loginStudent = async (req, res) => {
           expiresIn: "20000sec",
         }
       );
+
       return res
         .status(200)
         .send({ msg: "Student logged In Successfully", token });
     }
-    
   } catch (error) {
     return res
       .status(500)
