@@ -22,7 +22,8 @@ const Login = () => {
     catch(error){
     // if (Email === "yourEmail" && Password === "yourPassword") {
     //   toast.success("Login successful!");
-      toast.error("Invalid credentials. Please try again.");
+      // toast.error("Invalid credentials. Please try again.");
+      toast.error(error.response.data.msg);
       console.log(error)
   }
   };
@@ -39,7 +40,7 @@ const Login = () => {
             <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
-              placeholder="Enter your username"
+              placeholder="Enter your email"
               value={Email}
               onChange={(e) => setUsername(e.target.value)}
             />
