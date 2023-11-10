@@ -126,4 +126,35 @@ const updateCourse = async (req, res) => {
   }
 };
 
-module.exports = { createCourse, getCourse, updateCourse };
+// *************** Delete Course API ***************
+
+let deleteCourse = async (req, res) => {
+  try {
+    const courseId = req.params.id;
+
+    // Validation checks...
+    if (!Validation.isValidObjectId(courseId)) {
+      return res
+        .status(400)
+        .send({ status: false, msg: "Invalid course ID provided" });
+    }
+
+    const deletedCourse = await CourseModel.findByIdAndDelete(courseId);
+
+    if (!deletedCourse) {
+      return res.status(404).send({ status: false, msg: "Course not found" });
+    }
+
+    return res.status(200).send({
+      status: true,
+      msg: "Course deleted successfully",
+      data: deletedCourse,
+    });
+  } catch (err) {
+    return res
+      .status(500)
+      .send({ status: false, msg: "Internal Server Error" });
+  }
+};
+
+module.exports = { createCourse, getCourse, updateCourse, deleteCourse };
