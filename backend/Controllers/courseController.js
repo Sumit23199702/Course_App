@@ -1,3 +1,4 @@
+const courseModel = require("../Models/courseModel");
 const CourseModel = require("../Models/courseModel");
 const Validation = require("./validator");
 
@@ -93,7 +94,7 @@ const updateCourse = async (req, res) => {
   try {
     const courseId = req.params.id;
     const updatedCourseData = req.body;
-
+    let { title, description, instructor, duration, price } = updatedCourseData;
     // Validation checks...
     if (!Validation.isValidBody(updatedCourseData)) {
       return res.status(400).send({
@@ -101,6 +102,22 @@ const updateCourse = async (req, res) => {
         msg: "Invalid data provided for updating the course",
       });
     }
+    if (!Validation.isValid(title || description || instructor || duration || price) )
+      return res
+        .status(404)
+        .send({ status: false, msg: "Please provide appropriate details" });
+    
+    let dupcourse = await courseModel.findOne({
+      title,
+      description,
+      duration,
+      instructor,
+      price,
+    });
+    if (dupcourse)
+      return res
+        .status(400)
+        .send({ status: false, msg: "This Course Already exists!!" });
 
     const updatedCourse = await CourseModel.findByIdAndUpdate(
       courseId,
@@ -146,7 +163,7 @@ let deleteCourse = async (req, res) => {
     return res.status(200).send({
       status: true,
       msg: "Course deleted successfully",
-      data: deletedCourse,
+      // data: deletedCourse,
     });
   } catch (err) {
     return res

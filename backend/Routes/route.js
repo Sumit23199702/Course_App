@@ -15,7 +15,7 @@ router.post("/login", StudentController.loginStudent);
 
 router.post("/create", verifyToken, createCourse);
 router.get("/fetchCourse", getCourse);
-router.put("/update/:id", updateCourse);
-router.delete("/delete/:id", deleteCourse);
+router.put("/update/:id", verifyToken, updateCourse);
+router.delete("/delete/:id", verifyToken, deleteCourse);
 
 module.exports = router;
