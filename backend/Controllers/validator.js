@@ -16,4 +16,13 @@ let isValidEmail = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
 let isValidMobile =
   /^(?:(?:\+|0{0,2})91(\s*|[\-])?|[0]?)?([6789]\d{2}([ -]?)\d{3}([ -]?)\d{4})$/;
 
-module.exports = { isValid, isValidBody , isValidName, isValidEmail, isValidMobile };
+let isValidObjectId = /^[0-9a-fA-F]{24}$/;
+
+module.exports = {
+  isValid,
+  isValidBody,
+  isValidName,
+  isValidEmail,
+  isValidMobile,
+  isValidObjectId
+};

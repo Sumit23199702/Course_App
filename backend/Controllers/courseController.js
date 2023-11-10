@@ -71,8 +71,6 @@ const createCourse = async function (req, res) {
   }
 };
 
-// ===============================================================================
-
 // *************** Get Course API ***************
 const getCourse = async (req, res) => {
   try {
@@ -133,7 +131,7 @@ let deleteCourse = async (req, res) => {
     const courseId = req.params.id;
 
     // Validation checks...
-    if (!Validation.isValidObjectId(courseId)) {
+    if (!Validation.isValidObjectId.test(courseId)) {
       return res
         .status(400)
         .send({ status: false, msg: "Invalid course ID provided" });
