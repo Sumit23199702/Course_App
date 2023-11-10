@@ -22,13 +22,31 @@ const Mycourse = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
+      const token = localStorage.getItem("MERN STACK"); // Replace with your actual token key
+
+      if (!token) {
+        // Handle case when the user is not authenticated
+        toast.error("Unauthorized: Please log in");
+        return;
+      }
       let response = await axios.post(
         "http://localhost:5000/create",
-        courseData
+        courseData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       // Handle success, maybe redirect the user or show a success message
       toast.success(response.data.msg);
     } catch (error) {
+      if (error.response && error.response.status === 401) {
+        toast.error("Unauthorized: Please log in");
+        // Redirect to login page or handle the unauthorized state
+        // history.push("/login");
+        return;
+      }
       // toast.error("An unexpected error occurred");
       toast.error(error.response.data.msg);
       console.error("Error:", error);

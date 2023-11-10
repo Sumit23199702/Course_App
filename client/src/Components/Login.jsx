@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
+import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -8,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const Login = () => {
   const [Email, setUsername] = useState("");
   const [Password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async() => {
     try{
@@ -18,6 +20,7 @@ const Login = () => {
       
         toast.success("Login successful!");
         console.log(response);
+        navigate("/");
     }
     catch(error){
     // if (Email === "yourEmail" && Password === "yourPassword") {

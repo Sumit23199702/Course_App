@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
+import { useNavigate, Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,17 +8,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const RegisterPage = () => {
   const [Name, setName] = useState("");
-  const [Usn, setUsn] = useState("");
   const [Gender, setGender] = useState("");
   const [Email, setEmail] = useState("");
   const [Mobile, setMobile] = useState("");
   const [Password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleRegister = async () => {
     try {
       const response = await axios.post("http://localhost:5000/register", {
         Name,
-        Usn,
         Gender,
         Email,
         Mobile,
@@ -25,14 +25,20 @@ const RegisterPage = () => {
       });
       console.log(response);
 
-      // Assuming your backend returns a success message
-      toast.success("Registered successfully!!", response.data.message);
+      toast.success("Registered successfully!!");
+      navigate("/login");
     } catch (error) {
-      // Handle registration failure
-      toast.error(error.response.data.msg);
-      // toast.error("Registration failed. Please try again.");
-      toast.error(error.response.data.msg);
-      console.log(error);
+      if (error.response && error.response.data && error.response.data.msg) {
+        // If there is a response object and it has a data property with a msg property
+        toast.error(`${error.response.data.msg}`);
+      } else if (error.message) {
+        // If there is an error message, use it
+        toast.error(`${error.message}`);
+      } else {
+        // If all else fails, provide a generic error message
+        toast.error("Registration failed. Please try again.");
+      }
+      console.error(error);
     }
   };
 
@@ -51,16 +57,6 @@ const RegisterPage = () => {
               placeholder="Enter your name"
               value={Name}
               onChange={(e) => setName(e.target.value)}
-            />
-          </Form.Group>
-
-          <Form.Group controlId="formUsn">
-            <Form.Label>USN</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter your USN"
-              value={Usn}
-              onChange={(e) => setUsn(e.target.value)}
             />
           </Form.Group>
 
@@ -112,6 +108,11 @@ const RegisterPage = () => {
             <Button variant="primary" onClick={handleRegister}>
               Register
             </Button>
+          </div>
+          <div className="text-center mt-2">
+            <p>
+              Already have an account? <Link to="/login">Login here</Link>.
+            </p>
           </div>
         </Form>
 

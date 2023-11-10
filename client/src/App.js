@@ -7,6 +7,7 @@ import Mycourse from "./Components/Mycourse";
 import About from "./Components/About";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 const App = () => {
   return (
@@ -14,7 +15,8 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route element={<Home />} path="/" />
-        <Route element={<Mycourse />} path="/course" />
+        <PrivateRoute element={<Mycourse />} path="/course" />
+
         <Route element={<About />} path="/about" />
         <Route element={<Login />} path="/login" />
         <Route element={<Signup />} path="/signup" />
