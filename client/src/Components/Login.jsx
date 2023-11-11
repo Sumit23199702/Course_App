@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import { useNavigate, Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -9,26 +8,23 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const Login = () => {
   const [Email, setUsername] = useState("");
   const [Password, setPassword] = useState("");
-  const navigate = useNavigate();
 
-  const handleLogin = async() => {
-    try{
-    const response = await axios.post("http://localhost:5000/login", {
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/login", {
         Email,
         Password,
       });
-      
-        toast.success("Login successful!");
-        console.log(response);
-        navigate("/");
-    }
-    catch(error){
-    // if (Email === "yourEmail" && Password === "yourPassword") {
-    //   toast.success("Login successful!");
+
+      toast.success("Login successful!");
+      console.log(response);
+    } catch (error) {
+      // if (Email === "yourEmail" && Password === "yourPassword") {
+      //   toast.success("Login successful!");
       // toast.error("Invalid credentials. Please try again.");
       toast.error(error.response.data.msg);
-      console.log(error)
-  }
+      console.log(error);
+    }
   };
 
   return (
