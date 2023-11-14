@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import './Mycourse.css';
+import "./Mycourse.css";
 
 const FetchData = () => {
   const [fetchedData, setFetchedData] = useState({ data: [] });
+  const [editCourse, setEditCourse] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,32 +21,138 @@ const FetchData = () => {
     fetchData();
   }, []);
 
+  const handleEdit = (courseId) => {
+    // Set the course to be edited
+    const courseToEdit = fetchedData.data.find(
+      (course) => course._id === courseId
+    );
+    setEditCourse(courseToEdit);
+  };
+
+  const handleUpdate = async () => {
+    // Implement your update logic here
+    try {
+      const token = localStorage.getItem("MERN STACK");
+      if (!token) {
+        // Handle case when the user is not authenticated
+        console.error("Unauthorized: Please log in");
+        return;
+      }
+
+      const response = await axios.put(
+        `https://nodewebapp-4b8u.onrender.com/update/${editCourse._id}`,
+        editCourse,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log(response.data.msg);
+      // Reset the editCourse state and refresh the course list after update
+      setEditCourse(null);
+      FetchData(); // Change FetchData() to fetchData()
+    } catch (error) {
+      console.error("Error updating course:", error);
+    }
+  };
+
+  const handleDelete = async (courseId) => {
+    // Implement your delete logic here
+    try {
+      const token = localStorage.getItem("MERN STACK");
+      if (!token) {
+        // Handle case when the user is not authenticated
+        console.error("Unauthorized: Please log in");
+        return;
+      }
+
+      const response = await axios.delete(
+        `https://nodewebapp-4b8u.onrender.com/deleteCourse/${courseId}`, // Add "/getCourse" at the end
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log(response.data.msg);
+      // Refresh the course list after deletion
+      FetchData(); // Change FetchData() to fetchData()
+    } catch (error) {
+      console.error("Error deleting course:", error);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    // Cancel the edit mode
+    setEditCourse(null);
+  };
 
   return (
     <div className="fetch-data-container">
-    <h2 className="fetch-data-header">Discover Courses</h2>
-    <div className="fetch-data-cards">
-      {fetchedData.data.map((course) => (
-        <div key={course._id} className="course-card">
-          <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrm6nlnwicqXgVjGyK4zM0n0ng3tsM47AefA&usqp=CAU' alt={course.title} className="course-image" />
-          <div className="card-content">
-            <h3 className="course-title">{course.title}</h3>
-            <p className="course-instructor">
-              <strong>Instructor:</strong> {course.instructor}
-            </p>
-            <p className="course-duration">
-              <strong>Duration:</strong> {course.duration}
-            </p>
-            <p className="course-duration">
-              <strong>Price:</strong> {course.price}
-            </p>
-
-            
+      <h2 className="fetch-data-header">Discover Courses</h2>
+      <div className="fetch-data-cards">
+        {fetchedData.data.map((course) => (
+          <div key={course._id} className="course-card">
+            {editCourse && editCourse._id === course._id ? (
+              <div>
+                {/* Input fields for editing course details */}
+                <div className="action-buttons">
+                  <button
+                    className="btn btn-success"
+                    onClick={handleUpdate}
+                  >
+                    Save
+                  </button>
+                  <button
+                    className="btn btn-secondary"
+                    onClick={handleCancelEdit}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrm6nlnwicqXgVjGyK4zM0n0ng3tsM47AefA&usqp=CAU"
+                  alt={course.title}
+                  className="course-image"
+                />
+                <div className="card-content">
+                  <h3 className="course-title">{course.title}</h3>
+                  <p className="course-instructor">
+                    <strong>Instructor:</strong> {course.instructor}
+                  </p>
+                  <p className="course-duration">
+                    <strong>Duration:</strong> {course.duration}
+                  </p>
+                  <p className="course-duration">
+                    <strong>Price:</strong> {course.price}
+                  </p>
+                  <div className="action-buttons">
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => handleEdit(course._id)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => handleDelete(course._id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
-  </div>
   );
 };
 
