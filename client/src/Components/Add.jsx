@@ -19,40 +19,84 @@ const Add = () => {
     });
   };
 
+  // const submitHandler = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     //   const token = localStorage.getItem("MERN STACK"); // Replace with your actual token key
+
+  //     //   if (!token) {
+  //     //     // Handle case when the user is not authenticated
+  //     //     toast.error("Unauthorized: Please log in");
+  //     //     return;
+  //     //   }
+  //     let response = await axios.post(
+  //       "https://nodewebapp-4b8u.onrender.com/create",
+  //       courseData
+  //       // {
+  //       //   headers: {
+  //       //     Authorization: `Bearer ${token}`,
+  //       //   },
+  //       // }
+  //     );
+  //     // Handle success, maybe redirect the user or show a success message
+  //     toast.success(response.data.msg);
+  //   } catch (error) {
+  //     //   if (error.response && error.response.status === 401) {
+  //     //     toast.error("Unauthorized: Please log in");
+  //     //     // Redirect to login page or handle the unauthorized state
+  //     //     // history.push("/login");
+  //     //     return;
+  //     //   }
+  //     // toast.error("An unexpected error occurred");
+  //     toast.error(error.response.data.msg);
+  //     console.error("Error:", error);
+  //   }
+  // };
+  // const submitHandler = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     let response = await axios.post(
+  //       "https://nodewebapp-4b8u.onrender.com/create",
+  //       courseData
+  //     );
+  //     // Handle success, maybe redirect the user or show a success message
+  //     toast.success(response.data.msg);
+  //   } catch (error) {
+  //     toast.error(error.response?.data.msg || "An unexpected error occurred");
+  //     console.error("Error:", error);
+  //   }
+  // };
+
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      //   const token = localStorage.getItem("MERN STACK"); // Replace with your actual token key
-
-      //   if (!token) {
-      //     // Handle case when the user is not authenticated
-      //     toast.error("Unauthorized: Please log in");
-      //     return;
-      //   }
+      let token = localStorage.getItem("MERN STACK"); // Replace with your actual token key
+      if (!token) {
+        toast.error("Unauthorized: Please log in");
+        return;
+      }
+  
       let response = await axios.post(
-        "http://localhost:5000/create",
-        courseData
-        // {
-        //   headers: {
-        //     Authorization: `Bearer ${token}`,
-        //   },
-        // }
+        "https://nodewebapp-4b8u.onrender.com/create",
+        courseData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
-      // Handle success, maybe redirect the user or show a success message
+  
       toast.success(response.data.msg);
+      console.log(response);
+      window.location.href = "/course";
+
     } catch (error) {
-      //   if (error.response && error.response.status === 401) {
-      //     toast.error("Unauthorized: Please log in");
-      //     // Redirect to login page or handle the unauthorized state
-      //     // history.push("/login");
-      //     return;
-      //   }
-      // toast.error("An unexpected error occurred");
-      toast.error(error.response.data.msg);
+      toast.error(error.response?.data.msg || "An unexpected error occurred");
       console.error("Error:", error);
     }
   };
-
+  
+  
   return (
     <div className="container-fluid ms-3 mt-3 mb-2">
       <div className="row">

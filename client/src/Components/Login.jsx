@@ -9,6 +9,24 @@ const Login = () => {
   const [Email, setUsername] = useState("");
   const [Password, setPassword] = useState("");
 
+  // const handleLogin = async () => {
+  //   try {
+  //     const response = await axios.post("https://nodewebapp-4b8u.onrender.com/login", {
+  //       Email,
+  //       Password,
+  //     });
+
+  //     toast.success("Login successful!");
+  //     console.log(response);
+  //     window.location.href = "/add";
+  //   } catch (error) {
+  //     // if (Email === "yourEmail" && Password === "yourPassword") {
+  //     //   toast.success("Login successful!");
+  //     // toast.error("Invalid credentials. Please try again.");
+  //     toast.error(error.response.data.msg);
+  //     console.log(error);
+  //   }
+  // };
   const handleLogin = async () => {
     try {
       const response = await axios.post("https://nodewebapp-4b8u.onrender.com/login", {
@@ -16,14 +34,17 @@ const Login = () => {
         Password,
       });
 
+      const token = response.data.token; // Assuming your token key is named 'token'
+      localStorage.setItem("MERN STACK", token);
+
       toast.success("Login successful!");
-      console.log(response);
+      console.log("Token:", token);
+      window.location.href = "/add";
+
+      // Redirect or perform additional actions after successful login
     } catch (error) {
-      // if (Email === "yourEmail" && Password === "yourPassword") {
-      //   toast.success("Login successful!");
-      // toast.error("Invalid credentials. Please try again.");
       toast.error(error.response.data.msg);
-      console.log(error);
+      console.error(error);
     }
   };
 
