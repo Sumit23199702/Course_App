@@ -14,7 +14,7 @@ router.post("/register", StudentController.createStudent);
 router.post("/login", StudentController.loginStudent);
 
 router.post("/create", verifyToken, createCourse);
-router.get("/fetchCourse", getCourse);
+router.get("/getCourse", getCourse);
 router.put("/update/:id", verifyToken, updateCourse);
 router.delete("/delete/:id", verifyToken, deleteCourse);
 
