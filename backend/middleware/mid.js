@@ -12,7 +12,7 @@ const verifyToken = (req, res, next) => {
   if (token.startsWith("Bearer ")) {
     token = token.slice(7, token.length);
   }
-  
+  console.log(token)
   jwt.verify(token, "MERN STACK", (err, decoded) => {
     if (err) {
       return res
