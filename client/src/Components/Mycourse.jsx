@@ -54,7 +54,7 @@ const FetchData = () => {
       toast.success(response.data.msg);
       // Reset the editCourse state and refresh the course list after update
       setEditCourse(null);
-      FetchData();
+      // FetchData();
     } catch (error) {
       console.error("Error updating course:", error);
       toast.error("Error updating course");
@@ -75,7 +75,7 @@ const FetchData = () => {
         `https://nodewebapp-4b8u.onrender.com/delete/${courseId}`,
         {
           headers: {
-            
+
             Authorization: `Bearer ${token}`,
           },
         }
