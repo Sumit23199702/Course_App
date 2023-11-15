@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -8,25 +9,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const Login = () => {
   const [Email, setUsername] = useState("");
   const [Password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  // const handleLogin = async () => {
-  //   try {
-  //     const response = await axios.post("https://nodewebapp-4b8u.onrender.com/login", {
-  //       Email,
-  //       Password,
-  //     });
-
-  //     toast.success("Login successful!");
-  //     console.log(response);
-  //     window.location.href = "/add";
-  //   } catch (error) {
-  //     // if (Email === "yourEmail" && Password === "yourPassword") {
-  //     //   toast.success("Login successful!");
-  //     // toast.error("Invalid credentials. Please try again.");
-  //     toast.error(error.response.data.msg);
-  //     console.log(error);
-  //   }
-  // };
   const handleLogin = async () => {
     try {
       const response = await axios.post("https://nodewebapp-4b8u.onrender.com/login", {
@@ -38,14 +22,20 @@ const Login = () => {
       localStorage.setItem("MERN STACK", token);
 
       toast.success("Login successful!");
-      console.log("Token:", token);
-      window.location.href = "/add";
-
-      // Redirect or perform additional actions after successful login
+      navigate("/add");
     } catch (error) {
       toast.error(error.response.data.msg);
       console.error(error);
     }
+  };
+
+  const handleLogout = () => {
+    // Remove the authentication token from local storage
+    localStorage.removeItem("MERN STACK");
+    toast.success("Logout successful!");
+    // You can redirect or perform additional actions after successful logout
+    // For example, redirect to the login page
+    navigate("/login");
   };
 
   return (
@@ -79,6 +69,12 @@ const Login = () => {
           <div className="d-grid">
             <Button variant="primary" onClick={handleLogin}>
               Login
+            </Button>
+          </div>
+          <br />
+          <div className="d-grid">
+            <Button variant="danger" onClick={handleLogout}>
+              Logout
             </Button>
           </div>
         </Form>

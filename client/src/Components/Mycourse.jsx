@@ -7,6 +7,10 @@ import "./Mycourse.css";
 const FetchData = () => {
   const [fetchedData, setFetchedData] = useState({ data: [] });
   const [editCourse, setEditCourse] = useState(null);
+  const [editedDuration, setEditedDuration] = useState("");
+  const [editedDescription, setEditedDescription] = useState("");
+  const [editedInstructor, setEditedInstructor] = useState("");
+  const [editedPrice, setEditedPrice] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,6 +33,10 @@ const FetchData = () => {
       (course) => course._id === courseId
     );
     setEditCourse(courseToEdit);
+    setEditedDuration(courseToEdit.duration);
+    setEditedDescription(courseToEdit.description);
+    setEditedInstructor(courseToEdit.instructor);
+    setEditedPrice(courseToEdit.price);
   };
 
   const handleUpdate = async () => {
@@ -43,7 +51,12 @@ const FetchData = () => {
 
       const response = await axios.put(
         `https://nodewebapp-4b8u.onrender.com/update/${editCourse._id}`,
-        editCourse,
+        {
+          duration: editedDuration,
+          description: editedDescription,
+          instructor: editedInstructor,
+          price: editedPrice,
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -75,7 +88,6 @@ const FetchData = () => {
         `https://nodewebapp-4b8u.onrender.com/delete/${courseId}`,
         {
           headers: {
-
             Authorization: `Bearer ${token}`,
           },
         }
@@ -104,6 +116,41 @@ const FetchData = () => {
             {editCourse && editCourse._id === course._id ? (
               <div>
                 {/* Input fields for editing course details */}
+                <div className="mb-3">
+                  <label className="form-label">Duration:</label>
+                  <input
+                    type="text"
+                    value={editedDuration}
+                    onChange={(e) => setEditedDuration(e.target.value)}
+                    className="form-control"
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Description:</label>
+                  <textarea
+                    value={editedDescription}
+                    onChange={(e) => setEditedDescription(e.target.value)}
+                    className="form-control"
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Instructor:</label>
+                  <input
+                    type="text"
+                    value={editedInstructor}
+                    onChange={(e) => setEditedInstructor(e.target.value)}
+                    className="form-control"
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Price:</label>
+                  <input
+                    type="text"
+                    value={editedPrice}
+                    onChange={(e) => setEditedPrice(e.target.value)}
+                    className="form-control"
+                  />
+                </div>
                 <div className="action-buttons">
                   <button
                     className="btn btn-success"
