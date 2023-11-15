@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Mycourse.css";
 
 const FetchData = () => {
@@ -35,7 +37,7 @@ const FetchData = () => {
       const token = localStorage.getItem("MERN STACK");
       if (!token) {
         // Handle case when the user is not authenticated
-        console.error("Unauthorized: Please log in");
+        toast.error("Unauthorized: Please log in");
         return;
       }
 
@@ -49,12 +51,13 @@ const FetchData = () => {
         }
       );
 
-      console.log(response.data.msg);
+      toast.success(response.data.msg);
       // Reset the editCourse state and refresh the course list after update
       setEditCourse(null);
-      FetchData(); // Change FetchData() to fetchData()
+      FetchData();
     } catch (error) {
       console.error("Error updating course:", error);
+      toast.error("Error updating course");
     }
   };
 
@@ -64,12 +67,12 @@ const FetchData = () => {
       const token = localStorage.getItem("MERN STACK");
       if (!token) {
         // Handle case when the user is not authenticated
-        console.error("Unauthorized: Please log in");
+        toast.error("Unauthorized: Please log in");
         return;
       }
 
       const response = await axios.delete(
-        `https://nodewebapp-4b8u.onrender.com/deleteCourse/${courseId}`, // Add "/getCourse" at the end
+        `https://nodewebapp-4b8u.onrender.com/delete/${courseId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -77,11 +80,12 @@ const FetchData = () => {
         }
       );
 
-      console.log(response.data.msg);
+      toast.success(response.data.msg);
       // Refresh the course list after deletion
-      FetchData(); // Change FetchData() to fetchData()
+      // FetchData();
     } catch (error) {
       console.error("Error deleting course:", error);
+      toast.error("Error deleting course");
     }
   };
 
@@ -126,6 +130,9 @@ const FetchData = () => {
                   <p className="course-instructor">
                     <strong>Instructor:</strong> {course.instructor}
                   </p>
+                  <p className="course-instructor">
+                    <strong>Description:</strong> {course.description}
+                  </p>
                   <p className="course-duration">
                     <strong>Duration:</strong> {course.duration}
                   </p>
@@ -152,6 +159,7 @@ const FetchData = () => {
           </div>
         ))}
       </div>
+      <ToastContainer />
     </div>
   );
 };
