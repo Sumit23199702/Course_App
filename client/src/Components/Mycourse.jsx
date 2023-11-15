@@ -75,6 +75,7 @@ const FetchData = () => {
         `https://nodewebapp-4b8u.onrender.com/delete/${courseId}`,
         {
           headers: {
+            
             Authorization: `Bearer ${token}`,
           },
         }
