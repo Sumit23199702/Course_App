@@ -26,6 +26,7 @@ const Add = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    
     try {
       let token = localStorage.getItem("MERN STACK"); // Replace with your actual token key
       if (!token) {
