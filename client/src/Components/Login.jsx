@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Import Link
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,10 +13,13 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post("https://nodewebapp-4b8u.onrender.com/login", {
-        Email,
-        Password,
-      });
+      const response = await axios.post(
+        "https://nodewebapp-4b8u.onrender.com/login",
+        {
+          Email,
+          Password,
+        }
+      );
 
       const token = response.data.token; // Assuming your token key is named 'token'
       localStorage.setItem("MERN STACK", token);
@@ -29,13 +32,8 @@ const Login = () => {
     }
   };
 
-  const handleLogout = () => {
-    // Remove the authentication token from local storage
-    localStorage.removeItem("MERN STACK");
-    toast.success("Logout successful!");
-    // You can redirect or perform additional actions after successful logout
-    // For example, redirect to the login page
-    navigate("/login");
+  const handleSignup = () => {
+    navigate("/signup");
   };
 
   return (
@@ -67,15 +65,15 @@ const Login = () => {
           </Form.Group>
           <br />
           <div className="d-grid">
-            <Button variant="primary" onClick={handleLogin}>
+            <Button variant="primary" onClick={() => handleLogin()}>
               Login
             </Button>
           </div>
           <br />
-          <div className="d-grid">
-            <Button variant="danger" onClick={handleLogout}>
-              Logout
-            </Button>
+          <div className="text-center mt-2">
+            <p>
+              <Link to="/signup">Sign Up here</Link>.
+            </p>
           </div>
         </Form>
         <ToastContainer />

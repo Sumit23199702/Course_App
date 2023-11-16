@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap"; // Import Button from react-bootstrap
+import './Add.css'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -26,7 +27,6 @@ const Add = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    
     try {
       let token = localStorage.getItem("MERN STACK"); // Replace with your actual token key
       if (!token) {
@@ -120,11 +120,11 @@ const Add = () => {
                 Create Course
               </button>
             </div>
-            <div className="d-grid">
+            {/* <div className="d-grid">
               <Button variant="danger" onClick={handleLogout}>
                 Logout
-              </Button>
-            </div>
+              </Button> */}
+            {/* </div> */}
           </form>
           <ToastContainer />
         </div>
