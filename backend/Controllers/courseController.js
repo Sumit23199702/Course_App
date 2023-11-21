@@ -5,14 +5,13 @@ const Validation = require("./validator");
 // *************** Create Course API ***************
 const createCourse = async function (req, res) {
   try {
-    
-    let course = req.body;
+       let course = req.body;
     if (!Validation.isValidBody(course)) {
       return res.status(404).send({ status: false, msg: "No Data Provided" });
     }
     let { title, description, duration, instructor, price } = course;
 
-    // Name Validation
+    // Name Validation -
     if (!Validation.isValid(title)) {
       return res
         .status(400)
