@@ -5,6 +5,7 @@ const Validation = require("./validator");
 // *************** Create Course API ***************
 const createCourse = async function (req, res) {
   try {
+    
     let course = req.body;
     if (!Validation.isValidBody(course)) {
       return res.status(404).send({ status: false, msg: "No Data Provided" });
